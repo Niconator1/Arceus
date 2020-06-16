@@ -20,6 +20,9 @@
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
+# Save-Actions
+.idea/**/saveactions_settings.xml
+
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
@@ -64,7 +67,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Editor-based Rest Client
+# Editor-based org.nico.rest Client
 .idea/httpRequests
 
 # Android studio 3.1+ serialized cache file
