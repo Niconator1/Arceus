@@ -24,7 +24,7 @@ public class CommandLightDim extends CommandGateway {
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) {
             String percent = matcher.group();
-            int value = (int) (Double.parseDouble(percent) / 100.0 * 254.0 + 0.5);
+            int value = (int) (Math.max(0.0, Math.min(100.0, Double.parseDouble(percent))) / 100.0 * 254.0 + 0.5);
             try {
                 Map<String, Group> mapIndexToGroup = mapper.readValue(gateway.sendMessage("groups", null, RequestType.GET), new TypeReference<Map<String, Group>>() {
                 });

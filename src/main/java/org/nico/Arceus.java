@@ -1,9 +1,6 @@
 package org.nico;
 
-import org.nico.command.Command;
-import org.nico.command.CommandLightDim;
-import org.nico.command.CommandLightOff;
-import org.nico.command.CommandLightOn;
+import org.nico.command.*;
 import org.nico.gateway.Gateway;
 import org.nico.gateway.GatewayFinder;
 
@@ -25,6 +22,12 @@ public class Arceus {
 
     public static void main(String[] args) throws InterruptedException {
         Arceus arceus = Arceus.getInstance();
+        Thread.sleep(1000L);
+        arceus.handleRequest("Lampe Licht 1 an");
+        Thread.sleep(1000L);
+        arceus.handleRequest("Lampe Licht 1 dimmen 50%");
+        Thread.sleep(1000L);
+        arceus.handleRequest("Lampe Licht 1 aus");
         Thread.sleep(1000L);
         arceus.handleRequest("Licht an");
         Thread.sleep(1000L);
@@ -49,6 +52,10 @@ public class Arceus {
         listCommand.add(new CommandLightOff("Licht aus"));
         listCommand.add(new CommandLightOn("Licht an( \\d*%)?"));
         listCommand.add(new CommandLightDim("Licht dimmen \\d*%"));
+
+        listCommand.add(new CommandLampOff("Lampe .+ aus"));
+        listCommand.add(new CommandLampOn("Lampe .+ an( \\d*%)?"));
+        listCommand.add(new CommandLampDim("Lampe .+ dimmen( \\d*%)?"));
     }
 
     public Gateway getGateway() {

@@ -25,7 +25,7 @@ public class CommandLightOn extends CommandGateway {
         final int value;
         if (matcher.find()) {
             String percent = matcher.group();
-            value = (int) (Double.parseDouble(percent) / 100.0 * 254.0 + 0.5);
+            value = (int) (Math.max(0.0, Math.min(100.0, Double.parseDouble(percent))) / 100.0 * 254.0 + 0.5);
         } else {
             value = 254;
         }
