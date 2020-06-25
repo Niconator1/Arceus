@@ -20,7 +20,7 @@ public class CommandLampOff extends CommandGateway {
     @Override
     public void handleCommand(String text, Gateway gateway) {
         ObjectMapper mapper = new ObjectMapper();
-        Pattern patternName = Pattern.compile("Lampe (.+) aus");
+        Pattern patternName = Pattern.compile("Lampe (.+) aus", Pattern.CASE_INSENSITIVE);
         Matcher matcherName = patternName.matcher(text);
         final String name;
         if (matcherName.find()) {

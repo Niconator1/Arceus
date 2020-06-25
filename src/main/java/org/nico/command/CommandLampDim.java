@@ -29,7 +29,7 @@ public class CommandLampDim extends CommandGateway {
         } else {
             value = 254;
         }
-        Pattern patternName = Pattern.compile("Lampe (.+) dimmen");
+        Pattern patternName = Pattern.compile("Lampe (.+) dimmen", Pattern.CASE_INSENSITIVE);
         Matcher matcherName = patternName.matcher(text);
         final String name;
         if (matcherName.find()) {

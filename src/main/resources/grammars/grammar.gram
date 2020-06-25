@@ -1,0 +1,21 @@
+#JSGF V1.0;
+
+/**
+ * JSGF Grammar 
+ */
+
+grammar grammar;
+
+<name>  = ( jarvis );
+
+public <syntax> = <name> <command>;
+<command> = (<lightcommand> | <lampcommand>);
+<lightcommand> = (licht) (<lighttask> |<lighttaskadv>);
+<lampcommand> = (lampe) (<number>)(<lighttask> |<lighttaskadv>);
+<lighttask>  = ( an | aus );
+<lighttaskadv>  = ( an | dimmen ) [<percent>];
+
+<percent> = (<number>) (prozent);
+<number> = (null | <specialeinzelzahl> | zehn | elf | zwölf | dreizehn | vierzehn | fünfzehn | sechzehn | siebzehn | achtzehn | neunzehn | <zehner> | hundert | <specialeinzelzahl>und<zehner>);
+<specialeinzelzahl> = (ein | zwei | drei | vier | fünf | sechs | sieben | acht | neun);
+<zehner> = (zwanzig | dreißig | vierzig | fünfzig | sechzig | siebzig | achtzig | neunzig);

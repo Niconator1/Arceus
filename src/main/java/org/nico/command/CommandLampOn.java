@@ -29,7 +29,7 @@ public class CommandLampOn extends CommandGateway {
         } else {
             value = 254;
         }
-        Pattern patternName = Pattern.compile("Lampe (.+) an");
+        Pattern patternName = Pattern.compile("Lampe (.+) an", Pattern.CASE_INSENSITIVE);
         Matcher matcherName = patternName.matcher(text);
         final String name;
         if (matcherName.find()) {
