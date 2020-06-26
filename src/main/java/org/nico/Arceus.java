@@ -46,13 +46,15 @@ public class Arceus {
     }
 
     private void registerCommands() {
-        listCommand.add(new CommandLightOff("Licht aus"));
-        listCommand.add(new CommandLightOn("Licht an( \\d* prozent)?"));
-        listCommand.add(new CommandLightDim("Licht dimmen \\d* prozent"));
+        listCommand.add(new CommandLightOff("aus"));
+        listCommand.add(new CommandLightOn("an( \\d* prozent)?"));
+        listCommand.add(new CommandLightDim("dimmen \\d* prozent"));
+        listCommand.add(new CommandLightColor("Farbe .+"));
 
-        listCommand.add(new CommandLampOff("Lampe .+ aus"));
-        listCommand.add(new CommandLampOn("Lampe .+ an( \\d* prozent)?"));
-        listCommand.add(new CommandLampDim("Lampe .+ dimmen( \\d* prozent)?"));
+        listCommand.add(new CommandLampOff("aus"));
+        listCommand.add(new CommandLampOn("an( \\d* prozent)?"));
+        listCommand.add(new CommandLampDim("dimmen( \\d* prozent)?"));
+        listCommand.add(new CommandLampColor("Farbe .+"));
     }
 
     public Gateway getGateway() {

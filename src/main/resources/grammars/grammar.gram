@@ -10,10 +10,15 @@ grammar grammar;
 
 public <syntax> = <name> <command>;
 <command> = (<lightcommand> | <lampcommand>);
-<lightcommand> = (licht) (<lighttask> |<lighttaskadv>);
-<lampcommand> = (lampe) (<number>)(<lighttask> |<lighttaskadv>);
-<lighttask>  = ( an | aus );
-<lighttaskadv>  = ( an | dimmen ) [<percent>];
+<lightcommand> = (licht) [<group> ](<lighttask> | <lighttaskadv> | <colortask>);
+<lampcommand> = (lampe) (<number>)(<lighttask> | <lighttaskadv> | <colortask>);
+<lighttask>  = (an | aus);
+<lighttaskadv>  = (an | dimmen) [<percent>];
+<colortask>  = (farbe) (<color>);
+
+<group> = (schlafzimmer);
+
+<color> = (zurücksetzen | rot | grün | blau | orange | gelb);
 
 <percent> = (<number>) (prozent);
 <number> = (null | <specialeinzelzahl> | zehn | elf | zwölf | dreizehn | vierzehn | fünfzehn | sechzehn | siebzehn | achtzehn | neunzehn | <zehner> | hundert | <specialeinzelzahl>und<zehner>);

@@ -37,7 +37,7 @@ public class SpeechUtil {
                                 }
                             }
                         } else {
-                            sentenceBuilder.append(i + 1).append(" ").append(nextWord);
+                            sentenceBuilder.append(i + 1).append(" ").append(nextWord).append(" ");
                             foundNumber = true;
                             break;
                         }
