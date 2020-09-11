@@ -1,8 +1,9 @@
-package org.nico.command;
+package org.nico.command.gateway;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.nico.command.CommandGateway;
 import org.nico.data.Light;
 import org.nico.gateway.Gateway;
 import org.nico.rest.RequestType;

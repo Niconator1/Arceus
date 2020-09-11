@@ -1,4 +1,4 @@
-package org.nico.command;
+package org.nico.command.gateway;
 
 import org.nico.gateway.Gateway;
 import org.nico.rest.RequestType;

@@ -20,7 +20,7 @@ public class Gateway {
     @JsonProperty("id")
     public String id;
     @JsonProperty("internalipaddress")
-    public String internalIpAaddress;
+    public String internalIpAddress;
     @JsonProperty("macaddress")
     public String macAddress;
     @JsonProperty("internalport")
@@ -31,7 +31,9 @@ public class Gateway {
     public String publicIpAddress;
 
     public String sendMessage(String suffix, String payload, RequestType type) {
-        RestRequest request = new RestRequest("http://" + internalIpAaddress + ":" + internalPort + "/api/A89250547D/" + suffix, type);
+        String address = "http://" + internalIpAddress + ":" + internalPort + "/api/A89250547D/" + suffix;
+        RestRequest request = new RestRequest(address, type);
+        System.out.println(type + " " + address);
         request.setPayload(payload);
         return request.getResult();
     }

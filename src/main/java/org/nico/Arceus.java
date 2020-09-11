@@ -1,6 +1,9 @@
 package org.nico;
 
-import org.nico.command.*;
+import org.nico.command.Command;
+import org.nico.command.gateway.*;
+import org.nico.command.routine.CommandRoutineFadeIn;
+import org.nico.command.routine.CommandRoutineFadeOut;
 import org.nico.gateway.Gateway;
 import org.nico.gateway.GatewayFinder;
 import org.nico.speech.SpeechManager;
@@ -54,7 +57,10 @@ public class Arceus {
         listCommand.add(new CommandLampOff("aus"));
         listCommand.add(new CommandLampOn("an( \\d* prozent)?"));
         listCommand.add(new CommandLampDim("dimmen( \\d* prozent)?"));
-        listCommand.add(new CommandLampColor("Farbe .+"));
+        listCommand.add(new CommandLampColor("farbe .+"));
+
+        listCommand.add(new CommandRoutineFadeIn("routine fade in"));
+        listCommand.add(new CommandRoutineFadeOut("routine fade out"));
     }
 
     public Gateway getGateway() {

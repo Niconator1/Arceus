@@ -1,4 +1,4 @@
-package org.nico.command;
+package org.nico.command.gateway;
 
 import org.nico.data.HSVColor;
 import org.nico.gateway.Gateway;

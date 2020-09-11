@@ -14,7 +14,7 @@ public class HSVColor {
         mapNameToHSVColor.put("grün", new HSVColor(21845, 255, 255));
         mapNameToHSVColor.put("blau", new HSVColor(43690, 255, 255));
         mapNameToHSVColor.put("orange", new HSVColor(5461, 255, 255));
-        mapNameToHSVColor.put("gelb", new HSVColor(5461, 255, 255));
+        mapNameToHSVColor.put("gelb", new HSVColor(10922, 255, 255));
     }
 
     private final int hue;

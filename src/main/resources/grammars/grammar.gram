@@ -6,14 +6,17 @@
 
 grammar grammar;
 
-<name>  = ( jarvis );
-
 public <syntax> = <name> <command>;
-<command> = (<lightcommand> | <lampcommand>);
+<name>  = (jarvis);
+<command> = (<lightcommand> | <lampcommand> | <routinecommand> | herunterfahren );
+
 <lightcommand> = (licht) [<group> ](<lighttask> | <lighttaskadv> | <colortask>);
 <lampcommand> = (lampe) (<number>)(<lighttask> | <lighttaskadv> | <colortask>);
+<routinecommand> = (routine) (<routine>);
+
+<routine> = (fade in | fade out);
 <lighttask>  = (an | aus);
-<lighttaskadv>  = (an | dimmen) [<percent>];
+<lighttaskadv>  = (an | dimmen) <percent>;
 <colortask>  = (farbe) (<color>);
 
 <group> = (schlafzimmer);
@@ -21,6 +24,9 @@ public <syntax> = <name> <command>;
 <color> = (zurücksetzen | rot | grün | blau | orange | gelb);
 
 <percent> = (<number>) (prozent);
-<number> = (null | <specialeinzelzahl> | zehn | elf | zwölf | dreizehn | vierzehn | fünfzehn | sechzehn | siebzehn | achtzehn | neunzehn | <zehner> | hundert | <specialeinzelzahl>und<zehner>);
-<specialeinzelzahl> = (ein | zwei | drei | vier | fünf | sechs | sieben | acht | neun);
-<zehner> = (zwanzig | dreißig | vierzig | fünfzig | sechzig | siebzig | achtzig | neunzig);
+<number> = (null | <einer> | <zehnerCombi> | hundert/*<hunderterCombi>*/);
+<einer> = (eins | zwei | drei | vier | fünf | sechs | sieben | acht | neun);
+<einerCombi> = (ein | zwei | drei | vier | fünf | sechs | sieben | acht | neun);
+<zehnerBasis> = (zwanzig | dreißig | vierzig | fünfzig | sechzig | siebzig | achtzig | neunzig);
+<zehnerCombi> = (zehn | elf | zwölf | dreizehn | vierzehn | fünfzehn | sechzehn | siebzehn | achtzehn | neunzehn | [<einerCombi>und]<zehnerBasis>);
+/*<hunderterCombi> = ([<einerCombi>]hundert[(<einer> | <zehnerCombi>)]);*/

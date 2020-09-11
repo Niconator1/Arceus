@@ -22,7 +22,7 @@ public class GatewayFinder implements Runnable {
                 List<Gateway> listGateway = mapper.readValue(discoverRequest.getResult(), new TypeReference<List<Gateway>>() {
                 });
                 if (!listGateway.isEmpty()) {
-                    Gateway gateway = listGateway.get(0);
+                    Gateway gateway = listGateway.get(listGateway.size() - 1);
                     if (Objects.isNull(this.gateway)) {
                         this.gateway = gateway;
                     }

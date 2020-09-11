@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class SpeechUtil {
 
-    private final static String[] SINGLENUMBERS = {"null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben",
+    private final static String[] SINGLENUMBERS = {"null", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben",
             "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"};
 
     private final static String[] COMBONUMBERS = {"ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben",

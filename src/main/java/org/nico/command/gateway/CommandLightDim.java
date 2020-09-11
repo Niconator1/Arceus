@@ -1,4 +1,4 @@
-package org.nico.command;
+package org.nico.command.gateway;
 
 import org.nico.gateway.Gateway;
 import org.nico.rest.RequestType;
@@ -6,9 +6,9 @@ import org.nico.rest.RequestType;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CommandLightOn extends CommandLight {
+public class CommandLightDim extends CommandLight {
 
-    public CommandLightOn(String keyWord) {
+    public CommandLightDim(String keyWord) {
         super(keyWord);
     }
 
@@ -23,7 +23,6 @@ public class CommandLightOn extends CommandLight {
         } else {
             value = 255;
         }
-        gateway.sendMessage("groups/" + group + "/action", "{ \"on\": true, \"bri\": " + value + " }", RequestType.PUT);
+        gateway.sendMessage("groups/" + group + "/action", "{ \"bri\": " + value + " }", RequestType.PUT);
     }
-
 }

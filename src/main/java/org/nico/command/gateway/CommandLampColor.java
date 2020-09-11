@@ -1,4 +1,4 @@
-package org.nico.command;
+package org.nico.command.gateway;
 
 import org.nico.data.HSVColor;
 import org.nico.gateway.Gateway;
@@ -16,7 +16,7 @@ public class CommandLampColor extends CommandLamp {
 
     @Override
     public void handleCommand(String text, String lamp, Gateway gateway) {
-        Pattern pattern = Pattern.compile("Farbe .+", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("farbe .+", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(text);
         final int hue;
         final int sat;
