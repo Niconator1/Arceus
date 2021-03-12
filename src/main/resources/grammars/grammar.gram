@@ -1,0 +1,31 @@
+#JSGF V1.0;
+
+/**
+ * JSGF Grammar 
+ */
+
+grammar grammar;
+
+public <syntax> = <name> <command>;
+<name>  = (jarvis);
+<command> = (<lightcommand> | <lampcommand>);
+
+<lightcommand> = (licht) [<group> ](<lighttaskshort> | <lighttask> | <lighttaskadv> | <colortask>);
+<lampcommand> = (lampe) (<number>)(<lighttask> | <lighttaskadv> | <colortask>);
+
+<lighttaskshort> = <percent>;
+<lighttask>  = (an | aus);
+<lighttaskadv>  = (an | dimmen) <percent>;
+<colortask>  = (farbe) (<color>);
+
+<group> = (schlafzimmer);
+
+<color> = (zurücksetzen | rot | grün | blau | orange | gelb);
+
+<percent> = (<number>| ein) (prozent);
+<number> = (null | <einer> | <zehnerCombi> | hundert/*<hunderterCombi>*/);
+<einer> = (eins | zwei | drei | vier | fünf | sechs | sieben | acht | neun);
+<einerCombi> = (ein | zwei | drei | vier | fünf | sechs | sieben | acht | neun);
+<zehnerBasis> = (zwanzig | dreißig | vierzig | fünfzig | sechzig | siebzig | achtzig | neunzig);
+<zehnerCombi> = (zehn | elf | zwölf | dreizehn | vierzehn | fünfzehn | sechzehn | siebzehn | achtzehn | neunzehn | [<einerCombi>und]<zehnerBasis>);
+/*<hunderterCombi> = ([<einerCombi>]hundert[(<einer> | <zehnerCombi>)]);*/
