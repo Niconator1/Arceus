@@ -1,16 +1,21 @@
 package org.nico.command;
 
 public abstract class Command {
+    protected final String type;
+    protected final String params;
 
-    private String keyWord;
-
-    public Command(String keyWord) {
-        this.keyWord = keyWord;
+    public Command(String type, String params) {
+        this.type = type;
+        this.params = params;
     }
 
-    public String getKeyWord() {
-        return this.keyWord;
+    public String getType() {
+        return type;
     }
 
-    public abstract void handleCommand(String text);
+    public String getParams() {
+        return params;
+    }
+
+    public abstract void handleCommand();
 }

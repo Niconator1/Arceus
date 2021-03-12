@@ -1,76 +1,59 @@
 package org.nico;
 
 import org.nico.command.Command;
-import org.nico.command.gateway.*;
-import org.nico.command.routine.CommandRoutineFadeIn;
-import org.nico.command.routine.CommandRoutineFadeOut;
+import org.nico.data.DataManager;
 import org.nico.gateway.Gateway;
-import org.nico.gateway.GatewayFinder;
-import org.nico.speech.SpeechManager;
+import org.nico.gateway.GatewayManager;
+import org.nico.util.CommandUtil;
+import org.nico.voice.VoiceManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
+import java.util.Optional;
+import java.util.Scanner;
 
 public class Arceus {
 
-    private GatewayFinder gatewayFinder;
-    private SpeechManager speechManager;
-    private List<Command> listCommand = new ArrayList<>();
-
-    private static Arceus instance;
+    private static Arceus arceus;
+    private final GatewayManager gatewayManager;
+    private final DataManager dataManager;
+    private final VoiceManager voiceManager;
 
     private Arceus() {
-        registerCommands();
-        registerGatewayFinder();
-        registerSpeechManager();
+        voiceManager = new VoiceManager();
+        new Thread(voiceManager).start();
+        gatewayManager = new GatewayManager();
+        new Thread(gatewayManager).start();
+        dataManager = new DataManager();
+        new Thread(dataManager).start();
+    }
+
+    public static Arceus getInstance() {
+        if (arceus == null) {
+            arceus = new Arceus();
+        }
+        return arceus;
     }
 
     public static void main(String[] args) {
         Arceus arceus = Arceus.getInstance();
-        System.out.println(arceus);
-    }
-
-    private void registerSpeechManager() {
-        speechManager = new SpeechManager();
-        new Thread(speechManager).start();
-    }
-
-    private void registerGatewayFinder() {
-        gatewayFinder = new GatewayFinder();
-        new Thread(gatewayFinder).start();
-    }
-
-    public static Arceus getInstance() {
-        if (Arceus.instance == null) {
-            Arceus.instance = new Arceus();
+        Scanner in = new Scanner(System.in);
+        while (true) {
+            String text = in.nextLine();
+            arceus.handleCommand(text);
         }
-        return Arceus.instance;
-    }
-
-    private void registerCommands() {
-        listCommand.add(new CommandLightOff("aus"));
-        listCommand.add(new CommandLightOn("an( \\d* prozent)?"));
-        listCommand.add(new CommandLightDim("dimmen \\d* prozent"));
-        listCommand.add(new CommandLightColor("Farbe .+"));
-
-        listCommand.add(new CommandLampOff("aus"));
-        listCommand.add(new CommandLampOn("an( \\d* prozent)?"));
-        listCommand.add(new CommandLampDim("dimmen( \\d* prozent)?"));
-        listCommand.add(new CommandLampColor("farbe .+"));
-
-        listCommand.add(new CommandRoutineFadeIn("routine fade in"));
-        listCommand.add(new CommandRoutineFadeOut("routine fade out"));
     }
 
     public Gateway getGateway() {
-        return this.gatewayFinder.getGateway();
+        return gatewayManager.getGateway();
     }
 
-    public void handleRequest(String text) {
-        listCommand.parallelStream().filter(command -> {
-            Pattern pattern = Pattern.compile(command.getKeyWord(), Pattern.CASE_INSENSITIVE);
-            return pattern.matcher(text).matches();
-        }).findAny().ifPresent(command -> command.handleCommand(text));
+    public DataManager getDataManager() {
+        return dataManager;
     }
+
+    public void handleCommand(String text) {
+        Command command = CommandUtil.getCommand(text);
+        Optional<Command> optionalCommand = Optional.ofNullable(command);
+        optionalCommand.ifPresent(Command::handleCommand);
+    }
+
 }

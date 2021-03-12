@@ -1,40 +1,41 @@
 package org.nico.gateway;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.nico.rest.RequestType;
-import org.nico.rest.RestRequest;
+import java.util.Objects;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "id",
-        "internalipaddress",
-        "macaddress",
-        "internalport",
-        "name",
-        "publicipaddress"
-})
 public class Gateway {
 
-    @JsonProperty("id")
-    public String id;
-    @JsonProperty("internalipaddress")
-    public String internalIpAddress;
-    @JsonProperty("macaddress")
-    public String macAddress;
-    @JsonProperty("internalport")
-    public Integer internalPort;
-    @JsonProperty("name")
-    public String name;
-    @JsonProperty("publicipaddress")
-    public String publicIpAddress;
+    private final String ip;
+    private final int port;
 
-    public String sendMessage(String suffix, String payload, RequestType type) {
-        String address = "http://" + internalIpAddress + ":" + internalPort + "/api/A89250547D/" + suffix;
-        RestRequest request = new RestRequest(address, type);
-        System.out.println(type + " " + address);
-        request.setPayload(payload);
-        return request.getResult();
+    public Gateway(String ip, int port) {
+        this.ip = ip;
+        this.port = port;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public String getFullAddress() {
+        return this.ip + ":" + this.port;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o instanceof Gateway) {
+            Gateway gateway = (Gateway) o;
+            return port == gateway.port && Objects.equals(ip, gateway.ip);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ip, port);
     }
 }
